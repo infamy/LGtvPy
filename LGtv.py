@@ -79,3 +79,8 @@ class LGtv():
         """Unmute TV volume"""
         return 'ke %s %02X\r' % (self.id, 0x1)
     
+    def setVolume(self, level):
+        """Set the volume, must be a level between 0 and 64"""
+        if level > 64 or level < 0:
+            raise ValueError
+        return 'kf %s %02X\r' % (self.id, level)
