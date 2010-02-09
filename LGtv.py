@@ -38,6 +38,16 @@ class LGtv():
     RATIO_CINEMA_ZOOM_14 = 0x1D
     RATIO_CINEMA_ZOOM_15 = 0x1E
     RATIO_CINEMA_ZOOM_16 = 0x1F
+    
+    COLOR_MEDIUM = 0x0
+    COLOR_COOL = 0x1
+    COLOR_WARM = 0x2
+    
+    ENERGY_SAVING_OFF = 0x0
+    ENERGY_SAVING_MINIMUM = 0x1
+    ENERGY_SAVING_MEDIUM = 0x2
+    ENERGY_SAVING_MAXIMUM = 0x3
+    ENERGY_SAVING_SCREEN_OFF = 0x5
 
     def __init__(self, id=1):
         self.id = "%02X" % id
@@ -147,3 +157,21 @@ class LGtv():
         if level > 64 or level < 0:
             raise ValueError
         return 'kt %s %02X\r' % (self.id, level)
+    
+    def setColorTemperature(self, color):
+        """Set the color temperature"""
+        return 'ku %s %02X\r' % (self.id, color)
+    
+    def setEnergySaving(self, energy):
+        """Set the energy saving"""
+        return 'jq %s %02X\r' % (self.id, energy)
+    
+    def autoConfig(self):
+        """Trigger auto configuration"""
+        return 'ju %s %02X\r' % (self.id, 0x1)
+
+    def setBacklight(self, level):
+        """Set the backlight, must be a level between 0 and 64"""
+        if level > 64 or level < 0:
+            raise ValueError
+        return 'mg %s %02X\r' % (self.id, level)
