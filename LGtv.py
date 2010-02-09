@@ -1,5 +1,4 @@
 class LGtv():
-    id="01"
     
     INPUT_DTV_ANT = 0x00
     INPUT_DTV_CBL = 0x01
