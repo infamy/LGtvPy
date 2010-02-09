@@ -67,8 +67,8 @@ class LGtv():
         """Screen mute on (video off)"""
         return 'kd %s %02X\r' % (self.id, 0x1)
     
-    def screenMuteOSD(self):
-        """Screen mute OSD, but video is on"""
+    def screenMuteVideoOut(self):
+        """Screen mute video out, but video is on"""
         return 'kd %s %02X\r' % (self.id, 0x10)
     
     def volumeMuteOn(self):
@@ -84,3 +84,67 @@ class LGtv():
         if level > 64 or level < 0:
             raise ValueError
         return 'kf %s %02X\r' % (self.id, level)
+    
+    def setContrast(self, level):
+        """Set the contrast, must be a level between 0 and 64"""
+        if level > 64 or level < 0:
+            raise ValueError
+        return 'kg %s %02X\r' % (self.id, level)
+
+    def setBrightness(self, level):
+        """Set the brightness, must be a level between 0 and 64"""
+        if level > 64 or level < 0:
+            raise ValueError
+        return 'kh %s %02X\r' % (self.id, level)
+    
+    def setColor(self, level):
+        """Set the color, must be a level between 0 and 64"""
+        if level > 64 or level < 0:
+            raise ValueError
+        return 'ki %s %02X\r' % (self.id, level)
+
+    def setTint(self, level):
+        """Set the tint, must be a level between 0 and 64"""
+        if level > 64 or level < 0:
+            raise ValueError
+        return 'kj %s %02X\r' % (self.id, level)
+
+    def setSharpness(self, level):
+        """Set the sharpness, must be a level between 0 and 64"""
+        if level > 64 or level < 0:
+            raise ValueError
+        return 'kk %s %02X\r' % (self.id, level)
+    
+    def OSDoff(self):
+        """Turn off OSD"""
+        return 'kl %s %02X\r' % (self.id, 0x0)
+    
+    def OSDon(self):
+        """Turn on OSD"""
+        return 'kl %s %02X\r' % (self.id, 0x1)
+
+    def remoteControlLockModeOff(self):
+        """Turn remote control lock off"""
+        return 'km %s %02X\r' % (self.id, 0x0)
+    
+    def remoteControlLockModeOn(self):
+        """Turn remote control lock on"""
+        return 'km %s %02X\r' % (self.id, 0x1)
+    
+    def setTreble(self, level):
+        """Set the treble, must be a level between 0 and 64"""
+        if level > 64 or level < 0:
+            raise ValueError
+        return 'kr %s %02X\r' % (self.id, level)
+
+    def setBass(self, level):
+        """Set the bass, must be a level between 0 and 64"""
+        if level > 64 or level < 0:
+            raise ValueError
+        return 'ks %s %02X\r' % (self.id, level)
+    
+    def setBalance(self, level):
+        """Set the balance, must be a level between 0 and 64"""
+        if level > 64 or level < 0:
+            raise ValueError
+        return 'kt %s %02X\r' % (self.id, level)
