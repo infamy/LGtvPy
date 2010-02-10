@@ -16,7 +16,7 @@ class LGtv():
     INPUT_HDMI = 0x90
     INPUT_HDMI1 = 0x90
     INPUT_HDMI2 = 0x91
-    INPUT_HMDI3 = 0x92
+    INPUT_HDMI3 = 0x92
 
     RATIO_43 = 0x01
     RATIO_169 = 0x02
