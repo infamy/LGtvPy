@@ -1,4 +1,5 @@
 import serial
+import re
 
 class LGtv():
     
@@ -55,13 +56,21 @@ class LGtv():
         self.ser = serial.Serial(serialport, 9600, timeout=1)
 
     def __sendCmd(self, cmd):
+        self.ser.flushInput()
         self.ser.write(cmd)
         read = self.ser.readline()
         if read.find("OK") > 0:
             return True
         else:
             return False
-
+    
+    def __getMsg(self, cmd):
+        self.ser.flushInput()
+        self.ser.write(cmd)
+        ret = self.ser.readline()
+        retdata = re.compile(r'(OK|NG)(.*)x')
+        return re.findall(retdata, ret)[0][1]
+    
     def powerOff(self):
         """Turn the TV off"""
         return self.__sendCmd('ka %s %02X\r' % (self.id, 0x0))
@@ -70,6 +79,13 @@ class LGtv():
         """Turn the TV on"""
         return self.__sendCmd('ka %s %02X\r' % (self.id, 0x1))
     
+    def isOn(self):
+        """Checks if the TV is on, returns true if it is."""
+        if self.__getMsg('ka %s %02X\r' % (self.id, 0xff)) == "01":
+            return True
+        else:
+            return False
+        
     def inputSelect(self, input):
         """Select the TV's input"""
         return self.__sendCmd('xb %s %02X\r' % (self.id, input))
