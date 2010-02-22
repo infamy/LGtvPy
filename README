@@ -1,4 +1,4 @@
-A python class that uses pyserial to control an LG tv (**lH30 or better).
+A python class that uses pyserial to control an LG tv (**LH30 or better).
 
 It's fairly straight forward to use. 
 
